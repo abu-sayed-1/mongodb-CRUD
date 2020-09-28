@@ -9,9 +9,64 @@
     <h1>look mom , I have an mongodb</h1>
     <form action="/addProduct" method="post">
       <input type="text" name="name" id="" placeholder="name">
+      <br>
       <input type="text" name="price" id="" placeholder="price">
+      <br>
       <input type="text" name="quantity" id="" placeholder="quantity">
+      <br>
       <button type="submit">add addProduct</button>
     </form>
+    <div id="products">
+
+    </div>
+    
+    <script>
+    //  function loadProduct(){
+    //   fetch('/products')
+    //   .then(res => res.json())
+    //   .then(products => {
+    //     console.log(products);
+    //    const container = document.getElementById('products');
+    //    products.forEach(pd => {
+    //     const p = document.createElement('p');
+    //     p.innerHTML = `<strong style={{color:"red"}}>${pd.name}</strong> price:${pd.price} quantity:${pd.quantity}`;
+    //     container.appendChild(p);
+    //    });
+
+    //   })
+    //  }
+    //  loadProduct()
+// ------------------------------------------
+
+function loadProduct(){
+      fetch('/products')
+      .then(res => res.json())
+      .then(products => {
+        console.log(products);
+       const container = document.getElementById('products');
+       products.forEach(pd => {
+        const p = document.createElement('p');
+        p.innerHTML = `<strong style={{color:"red"}}>${pd.name}</strong> price:${pd.price} quantity:${pd.quantity}
+        <button onclick="deleteProduct('${pd._id}')">delete</button>
+        `;
+        container.appendChild(p);
+       });
+
+      })
+     }
+     loadProduct()
+     function deleteProduct(id){
+       fetch(`/delete/${id}`,{
+         method:'DELETE'
+       })
+       .then(res => res.json())
+       .then(result => {
+         console.log('delete successfully')
+       })
+
+    }
+
+
+    </script>
 </body>
 </html>
