@@ -242,11 +242,12 @@
     })
 
     // single product  -----
-    app.get('/products/:id', (req, res) => {
+    app.get('/product/:id', (req, res) => {
     //  const num = deleteId(productCollection)
     productCollection.find({_id: ObjectId(req.params.id)})
       .toArray ((err, documents) => {
         res.send(documents[0]);
+        console.log(documents)
       })
 
     })
