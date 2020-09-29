@@ -446,7 +446,9 @@ client.connect(err => {
   
     .then(result => {
       console.log('data added successfully');
-      res.send('succuss')
+      res.redirect('/')
+// ei code ^^ diye tumi webPage ke reload korco kno korco ei jonno korcho user zokhon input e new data set kore
+//submit korbe thokhon zeno page auto reload niya ney abong new data gulo oi page er modde set kore dey
     })
       deleteId(productCollection)
   })
@@ -466,7 +468,8 @@ const deleteId = product => {
     // console.log(req.params.id);
    product.deleteOne({_id: ObjectId(req.params.id)})
     .then (result => {
-      console.log(result)
+      res.send(result.deletedCount > 0);
+// এই কোড ইউজ ^^ করলে ডিলিট বাটনে ক্লিক করলে ওই ডাটাটা ডিলিট হয়ে যাবে database থেকে
     })
 
   
@@ -477,11 +480,11 @@ app.patch('/update/:id', (req, res)=>{
    $set: {price: req.body.price, quantity: req.body.quantity}
   })
   .then(result => {
-   console.log(result)
-  })
+    res.send(result.modifiedCount > 0);
+   })
   
   })
   })
 }
 
-app.listen(3100)
+app.listen(3700)
