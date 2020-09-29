@@ -8,11 +8,11 @@
 <body>
     <h1>look mom , I have an mongodb</h1>
     <form action="/addProduct" method="post">
-      <input type="text" name="name" id="" placeholder="name">
+      <input type="text" name="name" placeholder="name">
       <br>
-      <input type="text" name="price" id="" placeholder="price">
+      <input type="text" name="price" placeholder="price">
       <br>
-      <input type="text" name="quantity" id="" placeholder="quantity">
+      <input type="text" name="quantity"  placeholder="quantity">
       <br>
       <button type="submit">add addProduct</button>
     </form>
@@ -114,6 +114,7 @@ function loadAllProduct(){
 
 
 function loadProduct(id){
+  // console.log(id)
   fetch(`product/${id}`)
   .then(res => res.json())
   .then(data => {
@@ -125,14 +126,14 @@ function loadProduct(id){
     <br />
     quantity:<input type="text" value="${data.quantity}" id="quantity">
     <br />
-    <button onclick="updateProduct('${data._id}')" >Submit</button>
+    <button onclick="updateProduct('${data._id}')">Submit</button>
     `
   })
      // Update button ^^ here
 }
   // Update function here
 function updateProduct(id){
-  console.log('hit inside');
+  console.log('hit inside',id);
   const price = document.getElementById('price').value;
   const quantity = document.getElementById('quantity').value;
   const product = {id, price, quantity};
