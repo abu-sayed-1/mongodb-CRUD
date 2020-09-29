@@ -37,7 +37,62 @@
     //  }
     //  loadProduct()
 // ------------------------------------------
+// module No:48/video No:08----------------
+// function loadAllProduct(){
+//       fetch('/products')
+//       .then(res => res.json())
+//       .then(products => {
+//         // console.log(products);
+//        const container = document.getElementById('products');
+//        products.forEach(pd => {
+//         const p = document.createElement('p');
+//         p.innerHTML = `<strong>${pd.name}</strong> price:${pd.price} quantity:${pd.quantity}
+//         <button onclick="loadProduct('${pd._id}')">Update</button>
+//         <button onclick="deleteProduct('${pd._id}')">delete</button>
+//         `;
+//         container.appendChild(p);
+//        });
 
+//       })
+//      }
+//      loadAllProduct()
+
+
+// function loadProduct(id){
+//   fetch(`product/${id}`)
+//   .then(res => res.json())
+//   .then(data => {
+//     // console.log(data)
+//     const update = document.getElementById('update');
+//     update.innerHTML = `
+//     <h3> Update: ${data._id}</h3>
+//     price:<input type="text" value="${data.price}" id="price">
+//     <br />
+//     quantity:<input type="text" value="${data.quantity}" id="quantity">
+//     <br />
+//     <button>Submit</button>
+
+//     `
+//   })
+       
+// }
+//  // delete method here ----------------    
+//      function deleteProduct(id){
+//        fetch(`/delete/${id}`,{
+//          method:'DELETE'
+//        })
+//        .then(res => res.json())
+//        .then(result => {
+//          console.log('delete successfully')
+//        })
+
+//     }
+// -----------------------
+
+
+
+
+// module No:48/video No:09---update or modify a single item and save database-
 function loadAllProduct(){
       fetch('/products')
       .then(res => res.json())
@@ -70,13 +125,29 @@ function loadProduct(id){
     <br />
     quantity:<input type="text" value="${data.quantity}" id="quantity">
     <br />
-    <button>Submit</button>
-
+    <button onclick="updateProduct('${data._id}')" >Submit</button>
     `
   })
-       
+     // Update button ^^ here
 }
- // delete method here ----------------    
+  // Update function here
+function updateProduct(id){
+  console.log('hit inside');
+  const price = document.getElementById('price').value;
+  const quantity = document.getElementById('quantity').value;
+  const product = {id, price, quantity};
+   console.log(product);
+  fetch(`/update/${id}`, {
+    method:'PATCH',
+    headers: {'Content-type': 'application/json'},
+    body:JSON.stringify(product)
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log('Update now bro !')
+  })
+}
+ // delete method here----------------    
      function deleteProduct(id){
        fetch(`/delete/${id}`,{
          method:'DELETE'
@@ -87,9 +158,7 @@ function loadProduct(id){
        })
 
     }
-// -----------------------
-
-
+ 
     </script>
 </body>
 </html>
