@@ -6,7 +6,7 @@
     <title>mongodb</title>
 </head>
 <body>
-    <h1>look mom , I have an mongodb</h1>
+    <h1>Look mom, I have a mongo database!!!</h1>
     <form action="/addProduct" method="post">
       <input type="text" name="name" placeholder="name">
       <br>
@@ -14,10 +14,9 @@
       <br>
       <input type="text" name="quantity"  placeholder="quantity">
       <br>
-      <button type="submit">add addProduct</button>
+      <button type="submit">Add Product</button>
     </form>
-    <div id="products">
-    </div>
+    <div id="products"></div>
     <div id="update"></div>
     
     <script>
@@ -93,7 +92,7 @@
 
 
 // module No:48/video No:09---update or modify a single item and save database-
-function loadAllProduct(){
+function loadAllProducts(){
       fetch('/products')
       .then(res => res.json())
       .then(products => {
@@ -111,7 +110,7 @@ function loadAllProduct(){
 
       })
      }
-     loadAllProduct()
+     loadAllProducts()
 
 
 function loadProduct(id){
@@ -128,7 +127,7 @@ function loadProduct(id){
     quantity:<input type="text" value="${data.quantity}" id="quantity">
     <br />
     <button onclick="updateProduct('${data._id}')">Submit</button>
-    `
+    `;
   })
      // Update button ^^ here
 }
@@ -145,9 +144,10 @@ function updateProduct(id){
     body:JSON.stringify(product)
   })
   .then(res => res.json())
-  .then(data => {
+  .then(result => {
     if (result) {
-      loadAllProduct()
+      loadAllProducts();
+      document.getElementById('update').innerHTML = '';
     }
   })
 }
@@ -160,7 +160,7 @@ function updateProduct(id){
        .then(res => res.json())
        .then(result => {
          if (result) {
-          event.target.parentNode.style.display='none'
+          event.target.parentNode.style.display='none';
          }
        })
 

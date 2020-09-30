@@ -431,12 +431,10 @@ client.connect(err => {
   productCollection.find({_id: ObjectId(req.params.id)})
     .toArray ((err, documents) => {
       res.send(documents[0]);
-      console.log(documents)
+      // console.log(documents)
     })
 
   })
-
-
 
 //-01---html er modde ze form er modee ze input er data ache oi data POST kore server e pathai dichi------------------
   app.post("/addProduct", (req, res) => {
@@ -445,46 +443,34 @@ client.connect(err => {
     productCollection.insertOne(product)
   
     .then(result => {
-      console.log('data added successfully');
       res.redirect('/')
 // ei code ^^ diye tumi webPage ke reload korco kno korco ei jonno korcho user zokhon input e new data set kore
 //submit korbe thokhon zeno page auto reload niya ney abong new data gulo oi page er modde set kore dey
     })
-      deleteId(productCollection)
   })
 //-------01-------------------------------------
   // client.close();
-});
-// patch update here --------------------------------
-
-
-
-
-
 
 // delete method here-------------------
-const deleteId = product => {
   app.delete('/delete/:id', (req, res) => {
     // console.log(req.params.id);
-   product.deleteOne({_id: ObjectId(req.params.id)})
+    productCollection.deleteOne({_id: ObjectId(req.params.id)})
     .then (result => {
       res.send(result.deletedCount > 0);
 // এই কোড ইউজ ^^ করলে ডিলিট বাটনে ক্লিক করলে ওই ডাটাটা ডিলিট হয়ে যাবে database থেকে
     })
-
-  
+  });
+// patch update here --------------------------------
 app.patch('/update/:id', (req, res)=>{
   // deleteId(productCollection)
-  product.updateOne({_id: ObjectId(req.params.id)},
+  productCollection.updateOne({_id: ObjectId(req.params.id)},
   {
    $set: {price: req.body.price, quantity: req.body.quantity}
   })
   .then(result => {
     res.send(result.modifiedCount > 0);
-   })
-  
-  })
-  })
-}
+     })
+    })
+});
 
 app.listen(3700)
