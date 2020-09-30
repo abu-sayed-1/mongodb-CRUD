@@ -20,78 +20,77 @@
     <div id="update"></div>
     
     <script>
-    //  function loadProduct(){
-    //   fetch('/products')
-    //   .then(res => res.json())
-    //   .then(products => {
-    //     console.log(products);
-    //    const container = document.getElementById('products');
-    //    products.forEach(pd => {
-    //     const p = document.createElement('p');
-    //     p.innerHTML = `<strong style={{color:"red"}}>${pd.name}</strong> price:${pd.price} quantity:${pd.quantity}`;
-    //     container.appendChild(p);
-    //    });
+     function loadProduct(){
+      fetch('/products')
+      .then(res => res.json())
+      .then(products => {
+        console.log(products);
+       const container = document.getElementById('products');
+       products.forEach(pd => {
+        const p = document.createElement('p');
+        p.innerHTML = `<strong style={{color:"red"}}>${pd.name}</strong> price:${pd.price} quantity:${pd.quantity}`;
+        container.appendChild(p);
+       });
 
-    //   })
-    //  }
-    //  loadProduct()
+      })
+     }
+     loadProduct()
 // ------------------------------------------
 // module No:48/video No:08----------------
-// function loadAllProduct(){
-//       fetch('/products')
-//       .then(res => res.json())
-//       .then(products => {
-//         // console.log(products);
-//        const container = document.getElementById('products');
-//        products.forEach(pd => {
-//         const p = document.createElement('p');
-//         p.innerHTML = `<strong>${pd.name}</strong> price:${pd.price} quantity:${pd.quantity}
-//         <button onclick="loadProduct('${pd._id}')">Update</button>
-//         <button onclick="deleteProduct('${pd._id}')">delete</button>
-//         `;
-//         container.appendChild(p);
-//        });
+function loadAllProduct(){
+      fetch('/products')
+      .then(res => res.json())
+      .then(products => {
+        // console.log(products);
+       const container = document.getElementById('products');
+       products.forEach(pd => {
+        const p = document.createElement('p');
+        p.innerHTML = `<strong>${pd.name}</strong> price:${pd.price} quantity:${pd.quantity}
+        <button onclick="loadProduct('${pd._id}')">Update</button>
+        <button onclick="deleteProduct('${pd._id}')">delete</button>
+        `;
+        container.appendChild(p);
+       });
 
-//       })
-//      }
-//      loadAllProduct()
+      })
+     }
+     loadAllProduct()
 
 
-// function loadProduct(id){
-//   fetch(`product/${id}`)
-//   .then(res => res.json())
-//   .then(data => {
-//     // console.log(data)
-//     const update = document.getElementById('update');
-//     update.innerHTML = `
-//     <h3> Update: ${data._id}</h3>
-//     price:<input type="text" value="${data.price}" id="price">
-//     <br />
-//     quantity:<input type="text" value="${data.quantity}" id="quantity">
-//     <br />
-//     <button>Submit</button>
+function loadProduct(id){
+  fetch(`product/${id}`)
+  .then(res => res.json())
+  .then(data => {
+    // console.log(data)
+    const update = document.getElementById('update');
+    update.innerHTML = `
+    <h3> Update: ${data._id}</h3>
+    price:<input type="text" value="${data.price}" id="price">
+    <br />
+    quantity:<input type="text" value="${data.quantity}" id="quantity">
+    <br />
+    <button>Submit</button>
 
-//     `
-//   })
+    `
+  })
        
-// }
-//  // delete method here ----------------    
-//      function deleteProduct(id){
-//        fetch(`/delete/${id}`,{
-//          method:'DELETE'
-//        })
-//        .then(res => res.json())
-//        .then(result => {
-//          console.log('delete successfully')
-//        })
+}
+ // delete method here ----------------    
+     function deleteProduct(id){
+       fetch(`/delete/${id}`,{
+         method:'DELETE'
+       })
+       .then(res => res.json())
+       .then(result => {
+         console.log('delete successfully')
+       })
 
-//     }
-// -----------------------
-
+    }
 
 
 
-// module No:48/video No:09---update or modify a single item and save database-
+
+// module No:48/video No:09/10/11---update or modify a single item and save database-
 function loadAllProducts(){
       fetch('/products')
       .then(res => res.json())
